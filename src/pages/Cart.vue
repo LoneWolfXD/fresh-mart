@@ -15,11 +15,26 @@ const router = useRouter()
 
     <div v-else class="card pad">
       <ul class="col gap">
-        <li v-for="l in cart.lines" :key="l.id" class="row spread mid">
-          <div>{{ l.title }} × {{ l.qty }}</div>
-          <div><strong v-currency> {{ l.price * l.qty }} </strong></div>
-          <button class="link" @click.prevent="cart.remove(l.id)">remove</button>
-        </li>
+        <ul class="cart-list">
+            <li v-for="l in cart.lines" :key="l.id" class="cart-item">
+              <img :src="l.image" alt="" class="cart-thumb" />
+
+              <div class="cart-info">
+                <p class="cart-title">{{ l.title }}</p>
+                <div class="cart-qty">
+                  <button class="qty-btn" @click="cart.update(l.id, l.qty - 1)" :disabled="l.qty <= 1">−</button>
+                  <span class="qty-num">{{ l.qty }}</span>
+                  <button class="qty-btn" @click="cart.update(l.id, l.qty + 1)">+</button>
+                </div>
+              </div>
+
+              <div class="cart-price">
+                <strong v-currency>{{ l.price * l.qty }}</strong>
+                <button class="link remove" @click.prevent="cart.remove(l.id)">remove</button>
+              </div>
+            </li>
+      </ul>
+
       </ul>
       <hr style="border-color:#e5e7eb22;margin:1rem 0;">
       <p class="row spread mid">

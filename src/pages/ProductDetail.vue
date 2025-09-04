@@ -25,15 +25,20 @@ const qty = ref(1)
 <template>
 <section v-if="product">
 <div class="detail">
-<img :src="product.image" class="detail-cover" />
-<div>
-<h2 class="h2">{{ product.title }}</h2>
-<p class="muted">{{ product.desc }}</p>
-<p><span v-currency> {{ product.price }} </span></p>
-<QuantityInput v-model="qty" :max="product.stock" />
-<button class="btn" @click="cart.add(product, qty)">Add to cart</button>
+  <img :src="product.image" class="detail-cover" />
+
+  <div class="detail-info">
+    <h2 class="h2">{{ product.title }}</h2>
+    <p class="muted">{{ product.desc }}</p>
+    <p class="detail-price"><span v-currency>{{ product.price }}</span></p>
+
+    <div class="detail-actions">
+      <QuantityInput v-model="qty" :max="product.stock" />
+      <button class="btn cart-btn" @click="cart.add(product, qty)">Add to cart</button>
+    </div>
+  </div>
 </div>
-</div>
+
 </section>
 <p v-else>Product not found.</p>
 </template>

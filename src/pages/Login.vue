@@ -11,7 +11,7 @@ const router = useRouter()
 const route = useRoute()
 
 // preset creds
-const PRESET_USER = 'demo@freshmart.com'
+const PRESET_USER = 'freshmart'
 const PRESET_PASS = 'fresh123'
 
 function submit() {
@@ -29,7 +29,7 @@ function submit() {
 <template>
   <div class="card pad" style="max-width:420px;margin:3rem auto;">
     <h2 class="h2">Login</h2>
-    <p class="muted">Use <b>demo@freshmart.com</b> / <b>fresh123</b></p>
+    <p class="muted">Use <b>freshmart</b> / <b>fresh123</b></p>
     <form @submit.prevent="submit" class="col gap">
       <input v-model="username" placeholder="Email" class="text-inp" />
       <input v-model="password" type="password" placeholder="Password" class="text-inp" />

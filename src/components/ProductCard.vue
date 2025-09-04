@@ -14,7 +14,9 @@ function add() {
     router.push({ path: '/login', query: { redirect: `/products/${props.id}` } })
     return
   }
-  emit('add', { id: props.id, title: props.title, price: props.price })
+  emit('add', { id: props.id, title: props.title, price: props.price, image: props.image })
+
+  
 }
 </script>
 
