@@ -27,14 +27,60 @@ function submit() {
 </script>
 
 <template>
-  <div class="card pad" style="max-width:420px;margin:3rem auto;">
-    <h2 class="h2">Login</h2>
-    <p class="muted">Use <b>freshmart</b> / <b>fresh123</b></p>
-    <form @submit.prevent="submit" class="col gap">
-      <input v-model="username" placeholder="Email" class="text-inp" />
-      <input v-model="password" type="password" placeholder="Password" class="text-inp" />
-      <button class="btn">Sign in</button>
-      <p v-if="error" class="error">{{ error }}</p>
-    </form>
+  <div class="login-container">
+    <div class="login-illustration">
+      <div class="login-graphic">
+        <div class="floating-icon">🛒</div>
+        <div class="floating-icon delay-1">🥕</div>
+        <div class="floating-icon delay-2">🍎</div>
+        <div class="floating-icon delay-3">🥬</div>
+      </div>
+    </div>
+    
+    <div class="login-form-container">
+      <div class="login-header">
+        <h1 class="login-title">Welcome Back</h1>
+        <p class="login-subtitle">Sign in to your FreshMart account</p>
+      </div>
+      
+      <div class="demo-credentials">
+        <p class="demo-text">Demo Credentials:</p>
+        <div class="demo-info">
+          <span class="demo-label">Username:</span> <code>freshmart</code>
+        </div>
+        <div class="demo-info">
+          <span class="demo-label">Password:</span> <code>fresh123</code>
+        </div>
+      </div>
+      
+      <form @submit.prevent="submit" class="login-form">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input 
+            v-model="username" 
+            placeholder="Enter your username" 
+            class="form-input"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input 
+            v-model="password" 
+            type="password" 
+            placeholder="Enter your password" 
+            class="form-input"
+            required
+          />
+        </div>
+        
+        <button type="submit" class="login-btn">
+          Sign In
+        </button>
+        
+        <p v-if="error" class="error-message">{{ error }}</p>
+      </form>
+    </div>
   </div>
 </template>

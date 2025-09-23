@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import { useProducts } from '../composables/useProducts'
 import { useCart } from '../stores/cart'
 import ProductCard from '../components/ProductCard.vue'
+import HeroCarousel from '../components/HeroCarousel.vue'
 
 
 const { products, loading, error } = useProducts()
@@ -20,6 +21,8 @@ return products.value.filter(p => p.title.toLowerCase().includes(q.value.toLower
 
 <template>
 <section>
+<HeroCarousel />
+
 <h2 class="h2">Products</h2>
 <p v-if="loading">Loading…</p>
 <p v-else-if="error" class="error">{{ error }}</p>
