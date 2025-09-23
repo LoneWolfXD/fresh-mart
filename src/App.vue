@@ -4,6 +4,7 @@ import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
 import { useCart } from './stores/cart'
 import { useAuth } from './stores/auth'
 import SearchBar from './components/SearchBar.vue'
+import Footer from './components/Footer.vue'
 import { IconSun, IconMoon, IconShoppingCart, IconLogout, IconLogin, IconMenu2, IconX } from '@tabler/icons-vue'
 
 provide('currency', '₹')
@@ -88,10 +89,6 @@ function toggleMobileMenu() { mobileMenuOpen.value = !mobileMenuOpen.value }
     <main class="container">
       <RouterView />
     </main>
-    <footer class="footer">
-      <div class="footer-content">
-        <p>&copy; 2025 FreshMart. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 </template>

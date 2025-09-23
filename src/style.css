@@ -1160,20 +1160,7 @@ html, body, #app {
 }
 
 /* ===== Footer ===== */
-.footer {
-  margin-top: auto;
-  background: var(--card);
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-  color: var(--muted);
-  padding: 0 1rem;
-}
+/* Footer styles are now in Footer.vue component */
 
 /* ===== Responsive Utilities ===== */
 @media (max-width: 640px) {
@@ -1272,4 +1259,12 @@ html, body, #app {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+}
+
+/* ===== Utility Classes ===== */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
