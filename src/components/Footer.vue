@@ -113,7 +113,11 @@
 
 <style scoped>
 .footer {
-  @apply bg-gray-900 text-gray-300 mt-auto;
+  margin-top: auto;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-top: 3px solid;
+  border-image: linear-gradient(90deg, #14b8a6, #a3e635, #fbbf24) 1;
+  color: #e5e7eb;
 }
 
 .footer-container {
@@ -137,7 +141,12 @@
 }
 
 .footer-brand-text {
-  @apply text-xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent;
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .footer-description {
@@ -157,7 +166,22 @@
 }
 
 .download-btn {
-  @apply flex items-center gap-3 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition-colors duration-200;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid rgba(20, 184, 166, 0.3);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background: rgba(20, 184, 166, 0.2);
+  border-color: #14b8a6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.2);
 }
 
 .download-icon {
@@ -197,20 +221,38 @@
 }
 
 .social-link {
-  @apply p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-400 hover:text-white transition-colors duration-200;
+  padding: 0.75rem;
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid rgba(20, 184, 166, 0.2);
+  border-radius: 50%;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
+  border-color: transparent;
+  color: white;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.4);
 }
 
 .copyright {
   @apply text-sm text-gray-400;
 }
 
-/* Light theme adjustments */
 :global(.app.light) .footer {
-  @apply bg-gray-50 text-gray-700 border-t border-gray-200;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfccb 100%);
+  border-top: 3px solid;
+  border-image: linear-gradient(90deg, #14b8a6, #a3e635, #fbbf24) 1;
+  color: #0f172a;
 }
 
 :global(.app.light) .footer-brand-text {
-  @apply from-red-600 to-orange-600;
+  background: linear-gradient(135deg, #14b8a6, #65a30d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 :global(.app.light) .footer-description {

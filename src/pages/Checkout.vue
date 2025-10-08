@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useCart } from '../stores/cart'
 import { useRouter } from 'vue-router'
 
 const cart = useCart()
 const router = useRouter()
+const toast = inject('toast')
 
-// Form data (keeping existing logic)
 const formData = ref({
   firstName: '',
   lastName: '',
@@ -20,9 +20,11 @@ const formData = ref({
 })
 
 function place() {
+  toast.success('Order placed successfully! Thank you for shopping with us.')
   cart.clear()
-  router.replace('/')
-  alert('Order placed!') 
+  setTimeout(() => {
+    router.replace('/')
+  }, 1500)
 }
 </script>
 
@@ -243,11 +245,12 @@ function place() {
 
 <style scoped>
 .checkout-section {
-  @apply min-h-screen bg-gray-50;
+  min-height: 100vh;
+  padding: 2rem 0;
 }
 
 :global(.app:not(.light)) .checkout-section {
-  @apply bg-gray-900;
+  background: linear-gradient(135deg, #0b1220 0%, #0f172a 40%, #182a4a 100%);
 }
 
 .checkout-container {
@@ -283,23 +286,55 @@ function place() {
 }
 
 .form-section {
-  @apply bg-white rounded-2xl p-6 shadow-sm border border-gray-200;
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.form-section:hover {
+  border-color: rgba(20, 184, 166, 0.3);
+  box-shadow: 0 15px 50px rgba(20, 184, 166, 0.15);
 }
 
 :global(.app:not(.light)) .form-section {
-  @apply bg-gray-800 border-gray-700;
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+:global(.app:not(.light)) .form-section:hover {
+  border-color: rgba(20, 184, 166, 0.5);
 }
 
 .form-section-title {
-  @apply flex items-center gap-3 text-xl font-bold text-gray-900 mb-6;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
 }
 
 :global(.app:not(.light)) .form-section-title {
-  @apply text-white;
+  color: #e5e7eb;
 }
 
 .section-number {
-  @apply w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
 }
 
 .form-grid {
@@ -323,11 +358,41 @@ function place() {
 }
 
 .form-input {
-  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white text-gray-900;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  background: white;
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1), 0 4px 12px rgba(20, 184, 166, 0.2);
+  transform: translateY(-2px);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
 }
 
 :global(.app:not(.light)) .form-input {
-  @apply bg-gray-700 border-gray-600 text-white placeholder-gray-400;
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #e5e7eb;
+}
+
+:global(.app:not(.light)) .form-input:focus {
+  border-color: #a3e635;
+  box-shadow: 0 0 0 4px rgba(163, 230, 53, 0.1), 0 4px 12px rgba(163, 230, 53, 0.2);
+}
+
+:global(.app:not(.light)) .form-input::placeholder {
+  color: #64748b;
 }
 
 .form-textarea {
@@ -359,11 +424,14 @@ function place() {
 }
 
 .payment-option:has(.payment-radio:checked) .payment-content {
-  @apply border-red-500 bg-red-50;
+  border-color: #14b8a6;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(163, 230, 53, 0.08));
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
 }
 
 :global(.app:not(.light)) .payment-option:has(.payment-radio:checked) .payment-content {
-  @apply bg-red-900/20;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(163, 230, 53, 0.15));
+  border-color: #a3e635;
 }
 
 .payment-icon {
@@ -487,7 +555,28 @@ function place() {
 }
 
 .place-order-btn {
-  @apply w-full py-4 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold rounded-lg hover:from-red-600 hover:to-orange-600 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
+  color: white;
+  font-weight: 800;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);
+}
+
+.place-order-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(20, 184, 166, 0.4);
+}
+
+.place-order-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .desktop-btn {

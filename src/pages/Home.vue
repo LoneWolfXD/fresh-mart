@@ -29,7 +29,13 @@ return products.value.filter(p => p.title.toLowerCase().includes(q.value.toLower
 
 
 <div class="grid">
-<ProductCard v-for="p in filtered" :key="p.id" v-bind="p" @add="cart.add">
+<ProductCard
+  v-for="(p, index) in filtered"
+  :key="p.id"
+  v-bind="p"
+  :style="{ animationDelay: `${index * 0.1}s` }"
+  @add="cart.add"
+>
 <template #badge>
 <span class="badge" v-if="p.stock < 7">Fast‑moving</span>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuth } from '../stores/auth'
 
@@ -9,19 +9,20 @@ const error = ref('')
 const auth = useAuth()
 const router = useRouter()
 const route = useRoute()
+const toast = inject('toast')
 
-// preset creds
 const PRESET_USER = 'freshmart'
 const PRESET_PASS = 'fresh123'
 
 function submit() {
   if (username.value === PRESET_USER && password.value === PRESET_PASS) {
     auth.login()
-    // go back where user attempted to go
+    toast.success('Login successful! Welcome back.')
     const redirect = route.query.redirect || '/'
     router.replace(String(redirect))
   } else {
     error.value = 'Invalid credentials'
+    toast.error('Login failed. Please check your credentials.')
   }
 }
 </script>

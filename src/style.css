@@ -1,12 +1,13 @@
+/* Global font: Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
 /* ===== Reset & Base ===== */
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #app { height: 100%; margin: 0; }
 img { display: block; max-width: 100%; }
 
-/* Global font: Apple system stack */
 html, body, #app {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-               Cantarell, "Helvetica Neue", sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* ===== Theme Tokens ===== */
@@ -15,7 +16,10 @@ html, body, #app {
   --card: rgba(17, 24, 39, .9);
   --fg: #e5e7eb;
   --muted: #9ca3af;
-  --brand: #ef4444;
+  --brand-primary: linear-gradient(135deg, #14b8a6 0%, #a3e635 100%);
+  --brand-secondary: linear-gradient(135deg, #fb7185 0%, #fda4af 100%);
+  --brand-accent: #86efac;
+  --brand-highlight: #fbbf24;
   --border: #ffffff1a;
   --success: #10b981;
   --warning: #f59e0b;
@@ -23,11 +27,11 @@ html, body, #app {
 }
 
 .app.light {
-  --bg: linear-gradient(135deg, #ffffff 0%, #f7fafc 40%, #eef2f7 100%);
-  --card: rgba(255,255,255,.92);
+  --bg: linear-gradient(135deg, #f0fdfa 0%, #ecfccb 40%, #fef3c7 100%);
+  --card: rgba(255,255,255,.95);
   --fg: #0f172a;
-  --muted: #475569;
-  --border: #1f29371f;
+  --muted: #64748b;
+  --border: rgba(20, 184, 166, 0.15);
 }
 
 /* ===== Layout ===== */
@@ -1023,36 +1027,53 @@ html, body, #app {
 }
 
 /* ===== Enhanced Product Cards ===== */
-.h2 { 
-  font-size: 1.75rem; 
+.h2 {
+  font-size: 2rem;
   font-weight: 800;
-  margin: 2rem 0 1.5rem 0; 
+  margin: 2.5rem 0 1.5rem 0;
   color: var(--fg);
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-  gap: 1.5rem; 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
 }
 
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 18px;
+  border-radius: 24px;
   background: var(--card);
   color: var(--fg);
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 24px rgba(0,0,0,.15);
+  border: 2px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,.2);
-  border-color: rgba(239, 68, 68, 0.3);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(20, 184, 166, 0.25);
+  border-color: rgba(20, 184, 166, 0.5);
 }
 
 .cover {
@@ -1060,25 +1081,35 @@ html, body, #app {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   background: var(--border);
-  transition: transform 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover .cover {
-  transform: scale(1.05);
+  transform: scale(1.1) rotate(2deg);
 }
 
 .badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 0.5rem 0.75rem;
+  top: 16px;
+  left: 16px;
+  padding: 0.625rem 1rem;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 50px;
-  background: linear-gradient(135deg, #ef4444, #f97316);
+  background: linear-gradient(135deg, #fb7185, #fda4af);
   color: white;
   z-index: 2;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 6px 16px rgba(251, 113, 133, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .pad {
@@ -1108,9 +1139,12 @@ html, body, #app {
 }
 
 .price {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  color: #ef4444;
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
 }
 
@@ -1126,14 +1160,14 @@ html, body, #app {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  font-weight: 700;
+  padding: 0.875rem 1.25rem;
+  border-radius: 16px;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   border: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .btn.outline {
@@ -1143,20 +1177,21 @@ html, body, #app {
 }
 
 .btn.outline:hover {
-  border-color: #ef4444;
-  color: #ef4444;
-  transform: translateY(-1px);
+  border-color: #14b8a6;
+  color: #14b8a6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
 }
 
 .btn:not(.outline) {
-  background: linear-gradient(135deg, #ef4444, #f97316);
+  background: linear-gradient(135deg, #14b8a6, #a3e635);
   color: white;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 6px 16px rgba(20, 184, 166, 0.3);
 }
 
 .btn:not(.outline):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(20, 184, 166, 0.4);
 }
 
 /* ===== Footer ===== */

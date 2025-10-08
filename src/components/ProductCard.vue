@@ -8,6 +8,7 @@ const emit = defineEmits(['add'])
 const currency = inject('currency', '₹')
 const auth = useAuth()
 const router = useRouter()
+const toast = inject('toast')
 
 function add() {
   if (!auth.isLoggedIn) {
@@ -15,8 +16,7 @@ function add() {
     return
   }
   emit('add', { id: props.id, title: props.title, price: props.price, image: props.image })
-
-  
+  toast.success('Product added to cart!')
 }
 </script>
 

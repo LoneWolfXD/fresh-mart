@@ -3,11 +3,15 @@ import { provide, ref, computed } from 'vue'
 import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
 import { useCart } from './stores/cart'
 import { useAuth } from './stores/auth'
+import { useToast } from './composables/useToast'
 import SearchBar from './components/SearchBar.vue'
 import Footer from './components/Footer.vue'
+import Toast from './components/Toast.vue'
 import { IconSun, IconMoon, IconShoppingCart, IconLogout, IconLogin, IconMenu2, IconX } from '@tabler/icons-vue'
 
 provide('currency', '₹')
+const { toasts, removeToast } = useToast()
+provide('toast', useToast())
 const theme = ref('dark')
 provide('theme', theme)
 
@@ -90,5 +94,17 @@ function toggleMobileMenu() { mobileMenuOpen.value = !mobileMenuOpen.value }
       <RouterView />
     </main>
     <Footer />
+
+    <div class="toast-container">
+      <Toast
+        v-for="toast in toasts"
+        :key="toast.id"
+        :show="toast.show"
+        :message="toast.message"
+        :type="toast.type"
+        :duration="toast.duration"
+        @close="removeToast(toast.id)"
+      />
+    </div>
   </div>
 </template>
